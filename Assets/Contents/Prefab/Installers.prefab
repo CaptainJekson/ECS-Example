@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5972454374238911568}
   - component: {fileID: 5972454374238911569}
   m_Layer: 0
-  m_Name: '[Installer] CoreGame'
+  m_Name: CoreGame_Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 5972454374898123787}
   - component: {fileID: 5972454374898123780}
   m_Layer: 0
-  m_Name: '[Installer] UI'
+  m_Name: UI_Installer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

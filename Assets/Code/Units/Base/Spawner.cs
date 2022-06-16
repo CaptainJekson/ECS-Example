@@ -16,6 +16,6 @@ namespace Code.Units.Base
         
         public Transform ballsParent;
         public int countRed;
-        public int countBlue;
+        public int countGreen;
     }
 }

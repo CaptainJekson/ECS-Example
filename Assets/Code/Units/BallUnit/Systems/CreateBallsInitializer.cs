@@ -38,7 +38,7 @@ namespace Code.Units.BallUnit.Systems
                     sequence.AppendInterval(0.1f);   
                 }
                 
-                for (var i = 0; i < spawner.countRed; i++)
+                for (var i = 0; i < spawner.countGreen; i++)
                 {
                     var tempSpawner = spawner;
                     sequence.AppendCallback(() =>

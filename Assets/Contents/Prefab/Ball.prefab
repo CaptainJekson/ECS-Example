@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 3870774335634506531}
   - component: {fileID: 5478950349967923082}
   - component: {fileID: 5422407410300502016}
-  - component: {fileID: 5982940613164674116}
-  - component: {fileID: 7265236056290487473}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -114,36 +112,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5982940613164674116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6942786835710582760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b688432dc31a3348b70cade33554fda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializedData:
-    transform: {fileID: 5705140858820487074}
-    rigidbody: {fileID: 5422407410300502016}
-    meshRenderer: {fileID: 0}
-    speed: 500
---- !u!114 &7265236056290487473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6942786835710582760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a2bd464649b48418b501d7671b68bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializedData:
-    ballType: 0
-    meshRenderer: {fileID: 3870774335634506531}
-    force: {x: 0, y: 0, z: 0}

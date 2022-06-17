@@ -80,13 +80,6 @@
         "com.unity.modules.imgui": "1.0.0"
       }
     },
-    "com.xcrew.morpeh": {
-      "version": "https://github.com/scellecs/morpeh.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "cf5eff89ed3724e906a59d7514f9dc45c8d4b332"
-    },
     "com.unity.modules.ai": {
       "version": "1.0.0",
       "depth": 0,

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Code.Ball.Systems
 {
-    public class BallCollisionSystem : ReactiveSystem<GameEntity>
+    public class BallReflectSystem : ReactiveSystem<GameEntity>
     {
-        public BallCollisionSystem(Contexts contexts) : base(contexts.game)
+        public BallReflectSystem(Contexts contexts) : base(contexts.game)
         {
         }
 

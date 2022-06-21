@@ -9,17 +9,20 @@
 public static class GameComponentsLookup {
 
     public const int BallComponents = 0;
-    public const int ReflectBallEvent = 1;
+    public const int ReduceBallEvent = 1;
+    public const int ReflectBallEvent = 2;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
         "BallComponents",
+        "ReduceBallEvent",
         "ReflectBallEvent"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(BallComponents),
+        typeof(ReduceBallEvent),
         typeof(ReflectBallEvent)
     };
 }

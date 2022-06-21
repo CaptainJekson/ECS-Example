@@ -57,8 +57,7 @@ namespace Code.Ball.Systems
             });
             sequence.AppendInterval(0.1f);
         }
-
-
+        
         private Vector3 GetRandomPosition()
         {
             var randomPosition = new Vector3(Random.Range(-4.0f, 10.0f), 2.7f, Random.Range(9.0f, -8.0f));

@@ -28,7 +28,6 @@ namespace Code.Ball.Systems
 
                 if (ball.transform.position.y < -5.0f || ball.transform.localScale.x < 0.2f)
                 {
-                    Debug.Log("Destroy");
                     entity.Destroy();
                     Object.Destroy(ball.transform.gameObject);
                 }

@@ -789,6 +789,7 @@ GameObject:
   - component: {fileID: 2456081669071857769}
   - component: {fileID: 2456081669071857771}
   - component: {fileID: 2456081669071857770}
+  - component: {fileID: -2542875202730138491}
   m_Layer: 5
   m_Name: GameInterfaceWindow
   m_TagString: Untagged
@@ -858,6 +859,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 0.3
+--- !u!114 &-2542875202730138491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2456081669071857768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f2896a6b49c4e359acecd89d7b6bbcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _redCountText: {fileID: 2456081667833181362}
+  _greenCountText: {fileID: 2456081668569674279}
+  _timeScaleText: {fileID: 2540200089437440841}
+  _increaseTimeButton: {fileID: 2456081668557810094}
+  _decreaseTimeButton: {fileID: 2456081667540653669}
 --- !u!1 &2938277464579965133
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +888,7 @@ GameObject:
   - component: {fileID: 4887503054679655421}
   - component: {fileID: 2540200089437440841}
   m_Layer: 5
-  m_Name: TimeScaleTest
+  m_Name: TimeScaleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

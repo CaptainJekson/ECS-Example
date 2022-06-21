@@ -11,10 +11,12 @@ namespace Code.Ball.Systems
     public class CreateBallsSystem : IInitializeSystem
     {
         private readonly Contexts _contexts;
+        private readonly IGroup<GameEntity> _entities;
 
         public CreateBallsSystem(Contexts contexts)
         {
             _contexts = contexts;
+            _entities = _contexts.game.GetGroup(GameMatcher.BallComponents);
         }
         
         public void Initialize()
@@ -31,6 +33,8 @@ namespace Code.Ball.Systems
             {
                 CreateBall(sequence, ballConfig, BallType.Green);
             }
+
+            sequence.AppendCallback(AddForceBalls);
         }
 
         private void CreateBall(Sequence sequence, BallConfig ballConfig, BallType ballType)
@@ -49,9 +53,9 @@ namespace Code.Ball.Systems
                 var entity = _contexts.game.CreateEntity();
                 entity.AddBallComponents(spawnedBall.transform, spawnedBall.GetComponent<Rigidbody>(),
                     spawnedBall.GetComponent<MeshRenderer>(), ballConfig.Speed, ballType, Vector3.zero);
+                spawnedBall.Init(entity);
             });
             sequence.AppendInterval(0.1f);
-
         }
 
 
@@ -69,6 +73,18 @@ namespace Code.Ball.Systems
                 BallType.Green => Color.green,
                 _ => throw new ArgumentOutOfRangeException(nameof(ballType), ballType, null)
             };
+        }
+        
+        private void AddForceBalls()
+        {
+            foreach (var entity in _entities)
+            {
+                var speed = entity.ballComponents.speed;
+                
+                var randomForce =
+                    new Vector3(Random.Range(-1.0f, 1.0f), 0.0f, Random.Range(-1.0f, 1.0f)) * speed;
+                entity.ballComponents.force = randomForce;
+            }
         }
     }
 }

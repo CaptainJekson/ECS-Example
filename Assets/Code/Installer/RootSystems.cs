@@ -9,6 +9,7 @@ public class RootSystems : Feature
         Add(new BallsMoveSystem(contexts));
         Add(new BallReflectSystem(contexts));
         Add(new BallReduceSystem(contexts));
+        Add(new BallDestroySystem(contexts));
     }
 
     public sealed override Systems Add(ISystem system)

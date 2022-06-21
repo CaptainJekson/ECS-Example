@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fccac1d93851684e8f8d1f0ace268a1, type: 3}
+  m_Name: UnitConfig
+  m_EditorClassIdentifier: 
+  _ball: {fileID: 6942786835710582760, guid: d16662756f6ce8e40be639f25dc39a1f, type: 3}
+  _speed: 500
+  _countRed: 20
+  _countGreen: 20

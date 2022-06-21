@@ -3,53 +3,53 @@ using Entitas;
 using UnityEngine;
 
 //TODO реактивная система вызов которой происходит в данном случае когда изменяется значение компонента Health
-public sealed class LogHealthSystem : ReactiveSystem<GameEntity>
-{
-    public LogHealthSystem(Contexts context) : base(context.game)
-    {
-    }
-
-    public LogHealthSystem(ICollector<GameEntity> collector) : base(collector)
-    {
-    }
-
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.Health);
-    }
-
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.hasHealth;
-    }
-
-    protected override void Execute(List<GameEntity> entities)
-    {
-        foreach (var entity in entities)
-        {
-            var healthValue = entity.health.value;
-            Debug.Log("H = " + healthValue);
-        }
-    }
-}
-
-
-//TODO обычная система вызов которой происходит в GameInstaller например в Start или Update
-// public sealed class LogHealthSystem : IExecuteSystem
+// public sealed class LogHealthSystem : ReactiveSystem<GameEntity>
 // {
-//     private IGroup<GameEntity> _entities;
-//     
-//     public LogHealthSystem(Contexts contexts)
+//     public LogHealthSystem(Contexts context) : base(context.game)
 //     {
-//         _entities = contexts.game.GetGroup(GameMatcher.Health);
 //     }
-//     
-//     public void Execute()
+//
+//     public LogHealthSystem(ICollector<GameEntity> collector) : base(collector)
 //     {
-//         foreach (var entity in _entities)
+//     }
+//
+//     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+//     {
+//         return context.CreateCollector(GameMatcher.Health);
+//     }
+//
+//     protected override bool Filter(GameEntity entity)
+//     {
+//         return entity.hasHealth;
+//     }
+//
+//     protected override void Execute(List<GameEntity> entities)
+//     {
+//         foreach (var entity in entities)
 //         {
 //             var healthValue = entity.health.value;
 //             Debug.Log("H = " + healthValue);
 //         }
 //     }
 // }
+
+
+//TODO обычная система вызов которой происходит в GameExecutor например в Start или Update
+public sealed class LogHealthSystem : IExecuteSystem
+{
+    private readonly IGroup<GameEntity> _entities;
+    
+    public LogHealthSystem(Contexts contexts)
+    {
+        _entities = contexts.game.GetGroup(Matcher<GameEntity>.AllOf(GameMatcher.Health, GameMatcher.Transform));
+    }
+    
+    public void Execute()
+    {
+        foreach (var entity in _entities)
+        {
+            var healthValue = entity.health.value;
+            Debug.Log("H = " + healthValue);
+        }
+    }
+}

@@ -1,4 +1,3 @@
-using System;
 using Entitas;
 
 public class CreatePlayerSystem : IInitializeSystem
@@ -14,5 +13,6 @@ public class CreatePlayerSystem : IInitializeSystem
     {
         var entity = _contexts.game.CreateEntity();
         entity.AddHealth(100);
+        entity.AddTransform(null);
     }
 }

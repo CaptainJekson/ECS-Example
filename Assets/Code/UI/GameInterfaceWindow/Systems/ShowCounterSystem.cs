@@ -5,7 +5,7 @@ using Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 
-namespace Code.UI.GameInterfaceWindow
+namespace Code.UI.GameInterfaceWindow.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]

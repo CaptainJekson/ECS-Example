@@ -1,34 +1,29 @@
 using Code.Units.BallUnit.Components;
 using Code.Units.BallUnit.EventComponents;
-using Code.Units.Base;
 using Code.Units.Base.Components;
 using Code.Units.Base.Providers;
 using Code.Units.Utility;
 using DG.Tweening;
 using Morpeh;
-using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using Zenject;
 
 namespace Code.Units.BallUnit.Systems
 {
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    [CreateAssetMenu(menuName = "ECS/Initializers/" + nameof(CreateBallsInitializer))]
-    public sealed class CreateBallsInitializer : Initializer
+    public sealed class CreateBallsInitializer : IInitializer
     {
         private Filter _filterSpawners;
         private Filter _filterBalls;
         private CollisionPool _collisionPool;
+        
+        public World World { get; set; }
 
-        [Inject]
-        public void Ctor(CollisionPool collisionPool)
+        public CreateBallsInitializer(CollisionPool collisionPool)
         {
             _collisionPool = collisionPool;
         }
 
-        public override void OnAwake()
+        public void OnAwake()
         {
             _filterSpawners = World.Filter.With<Spawner>();
             _filterBalls = World.Filter.With<Unit>().With<Ball>();
@@ -56,7 +51,7 @@ namespace Code.Units.BallUnit.Systems
             }
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
             _filterSpawners = null;
             _filterBalls = null;
@@ -71,7 +66,7 @@ namespace Code.Units.BallUnit.Systems
                 randomPosition = GetRandomPosition();
             }
 
-            var spawnedEnemy = Instantiate(spawner.ball, randomPosition, Quaternion.identity);
+            var spawnedEnemy = Object.Instantiate(spawner.ball, randomPosition, Quaternion.identity);
             spawnedEnemy.GetComponent<CollidableObjectProvider>().Init(_collisionPool);
             ref var ballComponent = ref spawnedEnemy.Entity.GetComponent<Ball>();
             ballComponent.ballType = ballType;

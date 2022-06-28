@@ -268,8 +268,8 @@ MonoBehaviour:
   serializedData:
     ball: {fileID: 7265236056290487473, guid: d16662756f6ce8e40be639f25dc39a1f, type: 3}
     ballsParent: {fileID: 191231872}
-    countRed: 30
-    countGreen: 30
+    countRed: 5
+    countGreen: 5
 --- !u!4 &191231872
 Transform:
   m_ObjectHideFlags: 0

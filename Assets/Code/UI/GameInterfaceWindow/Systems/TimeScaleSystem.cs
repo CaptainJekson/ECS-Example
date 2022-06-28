@@ -6,22 +6,20 @@ using UnityEngine;
 
 namespace Code.UI.GameInterfaceWindow.Systems
 {
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    [CreateAssetMenu(menuName = "ECS/Systems/" + nameof(TimeScaleSystem))]
-    public sealed class TimeScaleSystem : UpdateSystem
+    public sealed class TimeScaleSystem : ISystem
     {
         private Filter _filterTimeIncrease;
         private Filter _filterTimeDecrease;
         
-        public override void OnAwake()
+        public World World { get; set; }
+        
+        public void OnAwake()
         {
             _filterTimeIncrease = World.Filter.With<TimeIncreaseEvent>().With<Components.GameInterfaceWindow>();
             _filterTimeDecrease = World.Filter.With<TimeDecreaseEvent>().With<Components.GameInterfaceWindow>();
         }
 
-        public override void OnUpdate(float deltaTime)
+        public void OnUpdate(float deltaTime)
         {
             foreach (var entity in _filterTimeIncrease)
             {
@@ -43,7 +41,7 @@ namespace Code.UI.GameInterfaceWindow.Systems
             }
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
             _filterTimeIncrease = null;
             _filterTimeDecrease = null;

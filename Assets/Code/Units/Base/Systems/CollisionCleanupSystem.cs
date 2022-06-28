@@ -1,17 +1,37 @@
-﻿using Morpeh;
+﻿using Code.Units.Base.Components;
+using Code.Units.Utility;
+using Morpeh;
 
 namespace Code.Units.Base.Systems
 {
-    public class CollisionCleanupSystem : LateUpdateSystem
+    public class CollisionCleanupSystem : ILateSystem
     {
-        public override void OnAwake()
+        private Filter _filter;
+        private CollisionPool _collisionPool;
+        
+        public World World { get; set; }
+
+        public CollisionCleanupSystem(CollisionPool collisionPool)
         {
-            throw new System.NotImplementedException();
+            _collisionPool = collisionPool;
+        }
+        
+        public void OnAwake()
+        {
+            _filter = World.Filter.With<CollisionInfo>();
+        }
+        
+        public void OnUpdate(float deltaTime)
+        {
+            foreach (var entity in _filter)
+            {
+                _collisionPool.Return(entity);
+            }
         }
 
-        public override void OnUpdate(float deltaTime)
+        public void Dispose()
         {
-            throw new System.NotImplementedException();
+            _filter = null;
         }
     }
 }

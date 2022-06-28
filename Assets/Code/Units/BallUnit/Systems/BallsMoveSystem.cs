@@ -7,20 +7,18 @@ using UnityEngine;
 
 namespace Code.Units.BallUnit.Systems
 {
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    [CreateAssetMenu(menuName = "ECS/Systems/" + nameof(BallsMoveSystem))]
-    public sealed class BallsMoveSystem : FixedUpdateSystem
+    public sealed class BallsMoveSystem : IFixedSystem
     {
         private Filter _filterBalls;
+        
+        public World World { get; set; }
 
-        public override void OnAwake()
+        public void OnAwake()
         {    
             _filterBalls = World.Filter.With<Unit>().With<Ball>();
         }
 
-        public override void OnUpdate(float deltaTime)
+        public void OnUpdate(float deltaTime)
         {
             foreach (var entity in _filterBalls)
             {
@@ -30,7 +28,7 @@ namespace Code.Units.BallUnit.Systems
             }
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
             _filterBalls = null;
         }

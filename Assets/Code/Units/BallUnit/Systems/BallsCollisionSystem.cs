@@ -2,6 +2,7 @@ using Code.Units.BallUnit.Components;
 using Code.Units.BallUnit.EventComponents;
 using Code.Units.BallUnit.Providers;
 using Code.Units.Base;
+using Code.Units.Base.Components;
 using Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
@@ -63,6 +64,12 @@ namespace Code.Units.BallUnit.Systems
             {
                 currentBall.localScale = Vector3.one * newCurrentRadius;
             }
+        }
+
+        public override void Dispose()
+        {
+            _filterReflectBall = null;
+            _filterReduceBall = null;
         }
     }
 }

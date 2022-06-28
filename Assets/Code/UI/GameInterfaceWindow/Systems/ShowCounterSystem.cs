@@ -46,6 +46,13 @@ namespace Code.UI.GameInterfaceWindow.Systems
             }
         }
 
+        public override void Dispose()
+        {
+            _filterGameInterfaceWindow = null;
+            _filterCreateBallFilter = null;
+            _filterDestroyBall = null;
+        }
+
         private void IncreaseBallCounter(BallType ballType)
         {
             foreach (var entity in _filterGameInterfaceWindow)

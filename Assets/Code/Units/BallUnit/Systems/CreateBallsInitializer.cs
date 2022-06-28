@@ -1,14 +1,14 @@
-using System.Collections.Generic;
 using Code.Units.BallUnit.Components;
 using Code.Units.BallUnit.EventComponents;
 using Code.Units.Base;
+using Code.Units.Base.Components;
+using Code.Units.Base.Providers;
+using Code.Units.Utility;
 using DG.Tweening;
 using Morpeh;
-using Morpeh.Collections;
-using Unity.Collections;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using Zenject;
 
 namespace Code.Units.BallUnit.Systems
 {
@@ -20,12 +20,19 @@ namespace Code.Units.BallUnit.Systems
     {
         private Filter _filterSpawners;
         private Filter _filterBalls;
+        private CollisionPool _collisionPool;
+
+        [Inject]
+        public void Ctor(CollisionPool collisionPool)
+        {
+            _collisionPool = collisionPool;
+        }
 
         public override void OnAwake()
         {
             _filterSpawners = World.Filter.With<Spawner>();
             _filterBalls = World.Filter.With<Unit>().With<Ball>();
-            
+
             foreach (var entity in _filterSpawners)
             {
                 ref var spawner = ref entity.GetComponent<Spawner>();
@@ -34,37 +41,38 @@ namespace Code.Units.BallUnit.Systems
                 for (var i = 0; i < spawner.countRed; i++)
                 {
                     var tempSpawner = spawner;
-                    sequence.AppendCallback(() =>
-                    {
-                        CreateBall(tempSpawner, BallType.Red);
-                    });
-                    sequence.AppendInterval(0.1f);   
+                    sequence.AppendCallback(() => { CreateBall(tempSpawner, BallType.Red); });
+                    sequence.AppendInterval(0.1f);
                 }
-                
+
                 for (var i = 0; i < spawner.countGreen; i++)
                 {
                     var tempSpawner = spawner;
-                    sequence.AppendCallback(() =>
-                    {
-                        CreateBall(tempSpawner, BallType.Green);
-                    });
-                    sequence.AppendInterval(0.1f);   
+                    sequence.AppendCallback(() => { CreateBall(tempSpawner, BallType.Green); });
+                    sequence.AppendInterval(0.1f);
                 }
-                
+
                 sequence.AppendCallback(AddForceBalls);
             }
+        }
+
+        public override void Dispose()
+        {
+            _filterSpawners = null;
+            _filterBalls = null;
         }
 
         private void CreateBall(Spawner spawner, BallType ballType)
         {
             var randomPosition = GetRandomPosition();
 
-            while(Physics.CheckSphere(randomPosition, 0.5f))
+            while (Physics.CheckSphere(randomPosition, 0.5f))
             {
                 randomPosition = GetRandomPosition();
             }
 
             var spawnedEnemy = Instantiate(spawner.ball, randomPosition, Quaternion.identity);
+            spawnedEnemy.GetComponent<CollidableObjectProvider>().Init(_collisionPool);
             ref var ballComponent = ref spawnedEnemy.Entity.GetComponent<Ball>();
             ballComponent.ballType = ballType;
             spawnedEnemy.Entity.AddComponent<CreateBallEvent>().ballType = ballType;

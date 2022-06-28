@@ -1,5 +1,6 @@
 using Code.Units.BallUnit.Components;
 using Code.Units.Base;
+using Code.Units.Base.Components;
 using Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
@@ -27,6 +28,11 @@ namespace Code.Units.BallUnit.Systems
                 ref var ball = ref entity.GetComponent<Ball>();
                 unit.rigidbody.AddForce(ball.force * deltaTime, ForceMode.Force);
             }
+        }
+
+        public override void Dispose()
+        {
+            _filterBalls = null;
         }
     }
 }

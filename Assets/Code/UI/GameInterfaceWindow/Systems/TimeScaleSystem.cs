@@ -42,5 +42,11 @@ namespace Code.UI.GameInterfaceWindow.Systems
                 entity.RemoveComponent<TimeDecreaseEvent>();
             }
         }
+
+        public override void Dispose()
+        {
+            _filterTimeIncrease = null;
+            _filterTimeDecrease = null;
+        }
     }
 }

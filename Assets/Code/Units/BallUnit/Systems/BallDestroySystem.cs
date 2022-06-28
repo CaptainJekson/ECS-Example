@@ -1,6 +1,7 @@
 using Code.Units.BallUnit.Components;
 using Code.Units.BallUnit.EventComponents;
 using Code.Units.Base;
+using Code.Units.Base.Components;
 using Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
@@ -33,6 +34,11 @@ namespace Code.Units.BallUnit.Systems
                     Destroy(unit.transform.gameObject);
                 }
             }
+        }
+        
+        public override void Dispose()
+        {
+            _filter = null;
         }
     }
 }

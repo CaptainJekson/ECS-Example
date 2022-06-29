@@ -1,5 +1,4 @@
 using Code.Units.BallUnit.Components;
-using Code.Units.BallUnit.EventComponents;
 using Code.Units.BallUnit.Providers;
 using Code.Units.Base.Components;
 using Morpeh;
@@ -9,39 +8,46 @@ namespace Code.Units.BallUnit.Systems
 {
     public sealed class BallsCollisionSystem : ISystem
     {
-        private Filter _filterReflectBall;
-        private Filter _filterReduceBall;
+        private Filter _filter;
         
         public World World { get; set; }
         
         public void OnAwake()
         {
-            _filterReflectBall = World.Filter.With<Unit>().With<Ball>().With<ReflectBallEvent>();
-            _filterReduceBall = World.Filter.With<Unit>().With<Ball>().With<ReduceBallEvent>();
+            _filter = World.Filter.With<CollisionInfo>();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (var entity in _filterReflectBall)
+            foreach (var entity in _filter)
             {
-                ref var ball = ref entity.GetComponent<Ball>();
-                ref var reflectBallEvent = ref entity.GetComponent<ReflectBallEvent>();
-                ball.force = Vector3.Reflect(ball.force, reflectBallEvent.normal);
-                entity.RemoveComponent<ReflectBallEvent>();
-            }
+                ref var collisionInfo = ref entity.GetComponent<CollisionInfo>();
+                var other = collisionInfo.otherCollision;
+                var current = collisionInfo.currentEntity;
+                var normal = new Vector3(other.contacts[0].normal.x, 0.0f, other.contacts[0].normal.z);
 
-            foreach (var entity in _filterReduceBall)
-            {
-                ref var unit = ref entity.GetComponent<Unit>();
-                ref var reduceBallEvent = ref entity.GetComponent<ReduceBallEvent>();
-                Reduce(unit.transform, reduceBallEvent.otherBall);
+                ref var currentBallComponent = ref current.GetComponent<Ball>();
+                ref var currentUnitComponent = ref current.GetComponent<Unit>();
+
+                var otherBall = other.gameObject.GetComponent<BallProvider>();
+                if (otherBall)
+                {
+                    ref var otherBallComponent = ref otherBall.Entity.GetComponent<Ball>();
+
+                    if (otherBallComponent.ballType != currentBallComponent.ballType)
+                    {
+                        Reduce(currentUnitComponent.transform, otherBall);
+                        return;
+                    }
+                }
+                
+                currentBallComponent.force = Vector3.Reflect(currentBallComponent.force, normal);
             }
         }
         
         public void Dispose()
         {
-            _filterReflectBall = null;
-            _filterReduceBall = null;
+            _filter = null;
         }
         
         private void Reduce(Transform currentBall, BallProvider otherBall)

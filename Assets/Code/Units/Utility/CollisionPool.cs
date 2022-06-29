@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Code.Units.Base.Components;
 using Morpeh;
 
 namespace Code.Units.Utility
@@ -18,6 +19,7 @@ namespace Code.Units.Utility
         public Entity GenerateNewEntity()
         {
             var entity = _world.CreateEntity();
+            entity.AddComponent<CollisionEvent>();
             return entity;
         }
         
@@ -39,6 +41,7 @@ namespace Code.Units.Utility
 
         public void Return(Entity entity)
         {
+            entity.RemoveComponent<CollisionInfo>();
             _pool.Push(entity);
         }
     }

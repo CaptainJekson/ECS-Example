@@ -58,7 +58,7 @@ MonoBehaviour:
       - m_Id: 7012ae084a2166d438a407c51b715f82
         m_Value: ServerData/[BuildTarget]
       - m_Id: 348b0993e3c84d0439212c4241f52dab
-        m_Value: http://localhost/[BuildTarget]
+        m_Value: https://c101916.hostru13.fornex.host/hupermind.ru/AssetsExample/[BuildTarget]
     m_ProfileEntryNames:
     - m_Id: 02f391015f2f91c41b54dfdbc76ce7a4
       m_Name: BuildTarget
@@ -84,8 +84,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 67575b424efdfed45b72ff621d9c10a8, type: 2}
   m_InitializationObjects: []
   m_CertificateHandlerType:
-    m_AssemblyName: 
-    m_ClassName: 
+    m_AssemblyName: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: Code.Test.CertificateIgnored
   m_ActivePlayerDataBuilderIndex: 3
   m_DataBuilders:
   - {fileID: 11400000, guid: 53e1c368cfac13d4ab55b4c2b2816281, type: 2}

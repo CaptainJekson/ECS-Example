@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550fd7a024bbecc41b2dee8aa028aca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cube:
+  _assetReference:
     m_AssetGUID: e9c49fa33a1e8ef45970cf53c0b4bef2
     m_SubObjectName: 
     m_SubObjectType: 

@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Code.Units.Base.Components;
 using Morpeh;
-using UnityEngine;
 
 namespace Code.Units.Utility
 {
@@ -17,13 +16,6 @@ namespace Code.Units.Utility
             _pool = new Stack<Entity>();
         }
 
-        public Entity GenerateNewEntity()
-        {
-            var entity = _world.CreateEntity();
-            entity.AddComponent<CollisionEvent>();
-            return entity;
-        }
-        
         public Entity Get()
         {
             Entity entity;
@@ -44,6 +36,13 @@ namespace Code.Units.Utility
         {
             entity.RemoveComponent<CollisionInfo>();
             _pool.Push(entity);
+        }
+        
+        private Entity GenerateNewEntity()
+        {
+            var entity = _world.CreateEntity();
+            entity.AddComponent<CollisionEvent>();
+            return entity;
         }
     }
 }

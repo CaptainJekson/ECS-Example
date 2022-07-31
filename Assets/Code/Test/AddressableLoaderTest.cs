@@ -1,3 +1,5 @@
+using System;
+using System.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -12,12 +14,32 @@ namespace Code.Test
 
         private void Start()
         {
-            _assetReference.InstantiateAsync().Completed += handle =>
+            // _assetReference.InstantiateAsync().Completed += handle =>
+            // {
+            //     _cube = handle.Result.GetComponent<Cube>();
+            //     Debug.Log("Объект загружен и создан");
+            //     DestroyCube();
+            // };
+
+            LoadAndDestroy();
+        }
+
+        private async void LoadAndDestroy()
+        {
+            await LoadCube();
+            DestroyCube();
+        }
+
+        private async Task LoadCube()
+        {
+            var handle = _assetReference.InstantiateAsync();
+            var cubeObject = await handle.Task;
+
+            if (cubeObject.TryGetComponent(out _cube) == false)
             {
-                _cube = handle.Result.GetComponent<Cube>();
-                Debug.Log("Объект загружен и создан");
-                DestroyCube();
-            };
+                throw new NullReferenceException($"Object Of type {typeof(Cube)} is null on " +
+                                                 $"attemp to load it from addressables");
+            }
         }
         
         private void DestroyCube()

@@ -1,4 +1,5 @@
 using Code.UI;
+using Code.UI.TestWindow;
 using Code.Units;
 using Morpeh;
 using Zenject;
@@ -14,6 +15,7 @@ namespace Code
             Container.BindInstance(world);
             
             UnitModule.Install(Container);
+            TestWindowModule.Install(Container);
             UiModule.Install(Container);
         }
     }

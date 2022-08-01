@@ -40,6 +40,8 @@ namespace Code.Test
                 throw new NullReferenceException($"Object Of type {typeof(Cube)} is null on " +
                                                  $"attemp to load it from addressables");
             }
+            
+            Debug.Log("Объект загружен и создан");
         }
         
         private void DestroyCube()

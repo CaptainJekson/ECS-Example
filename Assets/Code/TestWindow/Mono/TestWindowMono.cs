@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Code.UI.TestWindow.Mono
+namespace Code.TestWindow.Mono
 {
     public class TestWindowMono : MonoBehaviour
     {

@@ -1,22 +1,31 @@
+using Code.CommonClear;
+using Code.TestWindow.Mono.MainCanvas;
 using Code.UI;
-using Code.UI.TestWindow;
 using Code.Units;
 using Morpeh;
+using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
+using TestWindowModule = Code.TestWindow.TestWindowModule;
 
 namespace Code
 {
     public class StartupInstaller : MonoInstaller
     {
+        [FormerlySerializedAs("_mainCanvas")] [SerializeField] private MainCanvasMono mainCanvasMono;
+        
         public override void InstallBindings()
         {
             var world = World.Default;
             
             Container.BindInstance(world);
+
+            Container.Bind<MainCanvasMono>().FromComponentInNewPrefab(mainCanvasMono).AsSingle();
             
             UnitModule.Install(Container);
-            TestWindowModule.Install(Container);
             UiModule.Install(Container);
+            TestWindowModule.Install(Container);
+            CommonClearModule.Install(Container);
         }
     }
 }

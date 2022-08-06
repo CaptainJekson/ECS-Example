@@ -12,7 +12,7 @@ namespace Code
 {
     public class StartupInstaller : MonoInstaller
     {
-        [FormerlySerializedAs("_mainCanvas")] [SerializeField] private MainCanvasMono mainCanvasMono;
+        [SerializeField] private MainCanvasMono _mainCanvasMono;
         
         public override void InstallBindings()
         {
@@ -20,7 +20,7 @@ namespace Code
             
             Container.BindInstance(world);
 
-            Container.Bind<MainCanvasMono>().FromComponentInNewPrefab(mainCanvasMono).AsSingle();
+            Container.Bind<MainCanvasMono>().FromComponentInNewPrefab(_mainCanvasMono).AsSingle();
             
             UnitModule.Install(Container);
             UiModule.Install(Container);

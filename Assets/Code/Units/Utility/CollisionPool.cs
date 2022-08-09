@@ -18,17 +18,13 @@ namespace Code.Units.Utility
 
         public Entity Get()
         {
-            Entity entity;
-            
-            try
-            {
-                entity = _pool.Pop();
-            }
-            catch (Exception e)
+            var isPoolEntry = _pool.TryPop(out var entity);
+
+            if (!isPoolEntry)
             {
                 entity = GenerateNewEntity();
             }
-            
+
             return entity;
         }
 

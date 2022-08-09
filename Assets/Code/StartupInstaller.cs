@@ -4,7 +4,6 @@ using Code.UI;
 using Code.Units;
 using Morpeh;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Zenject;
 using TestWindowModule = Code.TestWindow.TestWindowModule;
 
